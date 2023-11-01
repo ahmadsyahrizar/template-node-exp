@@ -12,9 +12,8 @@ app.set("view engine", "ejs");
 
 // to custom default views pathname in ejs
 app.set("views","./src/views")
-
+app.use(express.static("public"))
 app.use(express.urlencoded())
-
 app.use(handleLogger)
 // app.use(isAdmin)
 
