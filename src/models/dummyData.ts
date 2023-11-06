@@ -1,4 +1,11 @@
-const carListData = [
+interface CarList {
+    id: number;
+    type: string;
+    brand: string;
+    year: number;
+}
+
+const cars: CarList[]= [
     {
         id: 1, 
         type: "small", 
@@ -19,4 +26,4 @@ const carListData = [
     }
 ]
 
-module.exports = carListData;
+module.exports = cars;
