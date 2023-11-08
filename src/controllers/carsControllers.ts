@@ -1,40 +1,84 @@
+import { CarBrandsModel } from "../models/CarBrands";
+
 const Request  = require("express").Request;
 const Response  = require("express").Response;
 const {v4: uuidv4} = require("uuid")
 const carListData = require("./../models/dummyData")
 
-const get = (req:Request, res: Response)=> {
-    const {brand=""} = req.query || {}
-    const filteredCars = carListData.filter(({brand})=> brand.toLowerCase() === brand.toLowerCase())
-
-    res.status(200).render('home', {
-        cars: brand ?  filteredCars : carListData
-    })
+//  
+const get = async (req:Request, res: Response)=> { 
+    const getCarBrands = await CarBrandsModel.query() || [];
+    //@ts-ignore
+    res.status(200).json(getCarBrands);
 }
 
-const post = (req: Request, res: Response)=> {
-    const reqBody  = req.body;
-    const newId = uuidv4();
-    const newObjCarWithId = {
-        ...reqBody, 
-        id: newId
-    }
+const post = async (req: Request, res: Response)=> {
+    const reqBody = req.body;
+    //@ts-ignore
+   
+    const id_car_brand = reqBody.id
+   
+    //@ts-ignore
+    const name = reqBody?.name
+    
+    const postCar = await CarBrandsModel.query().insert({id_car_brand, name}).returning("*");
+    // const newId = uuidv4().number;
+    //@ts-ignore
 
-    console.log({reqBody})
+    return res.json(postCar);
 
-    const newCarList = [...carListData, newObjCarWithId]
-    res.status(201).json(newCarList)
+
+
+//@ts-ignore
+    // const newCarList = [...carListData, newObjCarWithId]
+   
 }
 
-const getById = (req:Request, res:Response) => {
-    const getId = req.params.id;
-    const filterById = carListData.filter(({id})=> id === Number(getId) )
+const getById = async (req:Request, res:Response) => {
+    //@ts-ignore
+    const id = Number(req.params.id);
+    const getData = await CarBrandsModel.query().where("id_car_brand", id).throwIfNotFound()
+    //@ts-ignore
+    return res.json(getData);
+}
 
-    res.status(200).json(filterById)
+
+const deleteById = async (req:Request, res: Response) => {
+         //@ts-ignore
+
+    const reqParam  = req.params;
+    const id_car_brand = Number(reqParam.id);
+
+    const deleteData  = await CarBrandsModel.query().where("id_car_brand", id_car_brand).del();
+
+         //@ts-ignore
+        return res.json({
+            status: 'OK', 
+            message: deleteData
+        });
+}
+
+const updateById = async (req:Request, res: Response) => {
+    const reqBody = req.body;
+     //@ts-ignore
+    const reqParam  = req.params;
+    //@ts-ignore
+   
+    const id_car_brand = Number(reqParam.id)
+   
+    //@ts-ignore
+    const name = reqBody?.name
+ //@ts-ignore
+    const update  = await CarBrandsModel.query().where("id_car_brand", '=', id_car_brand).update({name})
+      //@ts-ignore
+    
+    return res.json(update);
 }
 
 module.exports = {
     get, 
     getById, 
-    post
+    post, 
+    deleteById, 
+    updateById
 }
