@@ -1,15 +1,18 @@
 import { CarBrandsModel } from "../models/CarBrands";
+import CarService from "../services/cars";
 
 const Request  = require("express").Request;
 const Response  = require("express").Response;
 const {v4: uuidv4} = require("uuid")
-const carListData = require("./../models/dummyData")
 
 //  
 const get = async (req:Request, res: Response)=> { 
-    const getCarBrands = await CarBrandsModel.query() || [];
+    const getAll  = await new CarService().getAll();
     //@ts-ignore
-    res.status(200).json(getCarBrands);
+    res.status(200).json({
+        message: "Success",
+        data: getAll
+    });
 }
 
 const post = async (req: Request, res: Response)=> {
