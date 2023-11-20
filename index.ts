@@ -6,6 +6,7 @@ const isAdmin   = require("./src/middleware/isAdmin")
 const handleLogger   = require("./src/middleware/handlerLogger")
 const carRouter = require("./src/routes/carRouter");
 const upload = require("./src/middleware/upload");
+const userRouter = require("./src/routes/userRouter");
 
 //@ts-ignore
 const app: Express = expressjs();
@@ -42,6 +43,7 @@ app.use(handleLogger)
 
 // separation of concern;
 app.use("/v1/cars", carRouter);
+app.use("/v1/users", userRouter)
 
 //@ts-ignore
 app.post("/v1/cars/picture", upload.single("picture"), (req, res)=> {
