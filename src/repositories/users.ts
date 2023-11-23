@@ -20,4 +20,10 @@ export default class UserRepository {
             email
         }).returning("*");
     }
+
+
+    async getById(param: number | string){
+        console.log({param})
+        return await UserModel.query().findOne({user_id: param}).returning("*")
+    }
 }

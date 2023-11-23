@@ -26,4 +26,8 @@ export default class UserService {
         const email = param.email || "";
         return await this.#userRepository.get(email)
     }
+
+    async getById(param: number | string){
+        return await this.#userRepository.getById(param)
+    }
 }

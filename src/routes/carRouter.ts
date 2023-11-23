@@ -4,6 +4,10 @@ const carController = require("./../controllers/carsControllers")
 
 
 // SELECT * FROM cars;
+
+
+// hanya bisa di akses oleh super admin dan admin tok. 
+
 router.get("/", carController.get);
 
 // SELECT * FROM cars WHERE id={:id};

@@ -4,9 +4,11 @@ const express = require("express");
 const router = express.Router();
 const userController = require("./../controllers/usersController");
 
-router.post("/register", userController.register);
-router.post("/login", userController.login);
-router.get("/userProfile", userController.getUserProfile)
+router.put("/admin/add", userController.isSuperAdmin, userController.editRoleToAdmin) // role superadmin
+
+router.get("/userProfile", userController.authorization,userController.getUserProfile) // semua role
+router.post("/register", userController.register); // => Semua role , default role  = member;
+router.post("/login", userController.login); // => semua role 
 
 
 module.exports = router;
