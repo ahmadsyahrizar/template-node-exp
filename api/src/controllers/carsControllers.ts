@@ -24,8 +24,8 @@ const get = async (req:Request, res: Response)=> {
 
     }).catch((err)=> {
         //@ts-ignore
-        res.status(200).json({
-            message: "success", 
+        res.status(404).json({
+            message: "error", 
             data: err
         })
     })

@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Binar Car Rental API
+  version: 1.0.0
+servers:
+  - description: "Local Server"
+    url: https://localhost
+paths: 
+  /v1/cars:
+    get:
+      parameters:
+        - in: query
+          name: car_brand
+          description: query param of car rental List
+          required: false
+          schema:
+            type: string
+
+      responses:
+        "404":
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+        "200":
+          description: List of cars is retrieved
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "SUCCESS"
+                  data:
+                    type: object
+                    properties:
+                      id_car_brand:
+                        type: string
+                        example: "1"
+                      name:
+                        type: string
+                        example: "rija"
+
+  /v1/cars/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          description: id of car
+          required: true
+          schema:
+            type: string
+      responses:
+    put:
+      responses:
+    delete:
+      responses:
+  /v1/cars/create:
+    post:
+      security:
+        - bearerAuth:[]
+      requestBody:
+        description: payload to create a car
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarPost'
+              
+      responses:
+        "200":
+          description: Car is created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarPost'
+
+
+#reusability
+components:
+  securitySchemes:
+    bearerAuth:
+      name: "Authorization"
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    CarPost:
+      type: object
+      properties:
+        id_car_brand:
+          type: string
+          example: "123ewr23"
+        name:
+          type: string
+          example: Honda
