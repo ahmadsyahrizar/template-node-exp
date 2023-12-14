@@ -1,14 +1,14 @@
 
-import React, { useEffect, useState } from "react";
-import "./components/Layout/App.css";
-import Spinner from "react-bootstrap/Spinner";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useEffect, useState } from 'react';
+import './components/Layout/App.css';
+import Spinner from 'react-bootstrap/Spinner';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';          
 
-import Card from "./components/Cards";
-import Container from "react-bootstrap/esm/Container";
+import Card from './components/Cards';
+import Container from 'react-bootstrap/esm/Container';
 
-const API = "https://dummyjson.com/products";
+const API = 'https://dummyjson.com/products';
 
 interface DataProductsType {
   products: Array<{
@@ -20,52 +20,52 @@ interface DataProductsType {
 }
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<DataProductsType>({
-    products: [],
-  });
+	const [loading, setLoading] = useState(false);
+	const [data, setData] = useState<DataProductsType>({
+		products: [],
+	});
 
-  useEffect(() => {
-    setLoading(true);
+	useEffect(() => {
+		setLoading(true);
 
-    if (!data.products.length) {
-      fetch(API)
-        .then((res) => res.json())
-        .then((results) => {
-          setData(results);
-          setLoading(false);
-        });
-    }
+		if (!data.products.length) {
+			fetch(API)
+				.then((res) => res.json())
+				.then((results) => {
+					setData(results);
+					setLoading(false);
+				});
+		}
 
-    // setLoading(false)
-  }, [data]);
+		// setLoading(false)
+	}, [data]);
 
-  // [] => effect akan dijalanka sekali saja.
-  // [counter, isToggle] => effect akan dijalankan ketika counter atau isToggle datanya berubah.
-  // tidak ada array => selalu jalan
+	// [] => effect akan dijalanka sekali saja.
+	// [counter, isToggle] => effect akan dijalankan ketika counter atau isToggle datanya berubah.
+	// tidak ada array => selalu jalan
 
-  return (
-    <div className="App-header">
-      {loading && !data && <Spinner />}
+	return (
+		<div className="App-header">
+			{loading && !data && <Spinner />}
 
-      <Container>
-        <Row>
-          {data.products.map(({ id, title, description, category }) => {
-            return (
-              <Col key={id}>
-                <Card
-                  id={id}
-                  title={title}
-                  description={description}
-                  category={category}
-                />
-              </Col>
-            );
-          })}
-        </Row>
-      </Container>
-    </div>
-  );
+			<Container>
+				<Row>
+					{data.products.map(({ id, title, description, category }) => {
+						return (
+							<Col key={id}>
+								<Card
+									id={id}
+									title={title}
+									description={description}
+									category={category}
+								/>
+							</Col>
+						);
+					})}
+				</Row>
+			</Container>
+		</div>
+	);
 }
 
 export default App;

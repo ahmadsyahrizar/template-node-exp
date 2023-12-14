@@ -1,18 +1,19 @@
-import { node } from "prop-types";
-import Menu from "../MenuBar";
-import "./App.css";
+import React from 'react';
+import { node } from 'prop-types';
+import Menu from '../MenuBar';
+import './App.css';
 
 const Layout = ({ children }) => {
-  return (
-    <div className="app">
-      <Menu />
-      {children}
-    </div>
-  );
+	return (
+		<div className="app">
+			<Menu />
+			{children}
+		</div>
+	);
 };
 
 Layout.propTypes = {
-  children: node.isRequired,
+	children: node.isRequired,
 };
 
 export default Layout;

@@ -2,6 +2,7 @@ import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./../App.tsx";
 import DetailPage from "./Detail";
+import DetailPage from "./TestPage";
 import Layout from "../components/Layout";
 import AdminRoute from "./Admin/routes";
 import Login from "./Login";
@@ -22,6 +23,9 @@ const RouterApp = () => {
               </Layout>
             }
           />
+
+          <Route path="/test-page" element={<TestPage />} />
+
           <Route
             path="/detail/:idCar"
             element={

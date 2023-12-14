@@ -1,8 +1,8 @@
-import logo from "./../../logo.svg"
+import logo from './../../logo.svg';
 
 const Image = () => {
-    return <img src={logo} className="App-logo" alt="logo" />
-}
+	return <img src={logo} className="App-logo" alt="logo" />;
+};
 
 
-export default Image
+export default Image;
