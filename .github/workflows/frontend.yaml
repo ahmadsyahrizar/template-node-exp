@@ -1,0 +1,28 @@
+name: Frontend CI
+on:
+    push:
+        branches:
+            - "**"
+    pull_request:
+        branches: 
+            - "**"
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: './../../frontend'
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+        - name: use node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '18.x'
+        - name: run eslint
+          run: npm run eslint
+        - name: run unit testing
+          run: npm run test
+        
+            
+               
