@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Container from 'react-bootstrap/esm/Container';
-import Spinner from 'react-bootstrap/esm/Spinner';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+// import Container from 'react-bootstrap/esm/Container';
+// import Spinner from 'react-bootstrap/esm/Spinner';
+// import { useParams } from 'react-router-dom';
 
-const API_DETAIL_PRODUCT = 'https://dummyjson.com/product';
+// const API_DETAIL_PRODUCT = 'https://dummyjson.com/product';
 
 const DetailPage = () => {
 
-	return <div>detail page</div>
+	return <div>detail page</div>;
 	// const { idCar } = useParams();
 	// const [dataDetailProduct, setDataDetailProduct] = useState(null);
 	// const [loading, setLoading] = useState(false);
