@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
 function CardComponent({ id, title, description, category }) {
+	console.log({id});
 	return (
 		<Card style={{ width: '18rem' }}>
 			<Card.Body>
@@ -11,7 +12,9 @@ function CardComponent({ id, title, description, category }) {
 				<Card.Text>{description}</Card.Text>
 
 				{/* <Link role='navigateCardDetail' to={`/detail/${id}`}>Card Link</Link> */}
-				<Link role='navigateCardDetail' to={`/test-page`}>Card Link</Link>
+				<Link role="navigateCardDetail" to={'/test-page'}>
+          Card Link
+				</Link>
 				{/* <a href={`/detail/${id}`}>Card Link</a> */}
 			</Card.Body>
 		</Card>
@@ -24,6 +27,5 @@ CardComponent.propTypes = {
 	description: string.isRequired,
 	category: string.isRequired,
 };
-
 
 export default CardComponent;

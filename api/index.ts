@@ -2,6 +2,8 @@ const { Model } = require("objection");
 const knex = require("knex");
 const expressjs = require("express");
 const ExpressT = require("express").Express;
+const bodyParser = require("body-parser");
+
 const YAML = require("yamljs");
 const cors = require("cors");
 const swaggerUI = require("swagger-ui-express");
@@ -13,6 +15,8 @@ const userRouter = require("./src/routes/userRouter");
 
 //@ts-ignore
 const app: Express = expressjs();
+app.use(bodyParser.json());
+app.use(expressjs.urlencoded({extended: true}));
 const swaggerDocument = YAML.load("./openAPI.yaml");
 const cloudinary = require("cloudinary").v2;
 const knexInstance = knex({
@@ -40,8 +44,11 @@ app.set("view engine", "ejs");
 
 // to custom default views pathname in ejs
 app.set("views", "./src/views");
+app.use((req:any, res:any, next:any)=> {
+  res.set("framework", "nodejs-1");
+  next()
+});
 app.use(expressjs.static("public"));
-app.use(expressjs.urlencoded());
 app.use(handleLogger);
 
 // separation of concern;
@@ -69,6 +76,9 @@ app.post("/v1/cars/picture", upload.single("picture"), (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`is listening to port ${PORT}`);
 });
+
+
+module.exports = server
